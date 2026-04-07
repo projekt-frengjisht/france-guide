@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================
+GLOBAL
+===================== */
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,Arial,sans-serif;
+margin:0;
+background:radial-gradient(circle at 20% 20%, #1a1a1a, #050505);
+color:#1f2933;
+line-height:1.7;
+overflow-x:hidden;
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar{width:6px}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#ffffff55,#ffffff22);
+border-radius:10px;
+}
+
+/* =====================
+HERO
+===================== */
+
+header{
+min-height:75vh;
+
+background:
+linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.8)),
+url('lyon.png');
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+color:white;
+padding:40px 20px;
+}
+
+header h1{
+
+font-family:"Playfair Display",serif;
+font-size:clamp(2.5rem,6vw,3.5rem);
+
+margin-bottom:15px;
+
+background:linear-gradient(90deg,#ffffff,#e8e8e8,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+letter-spacing:1px;
+
+text-shadow:0 10px 25px rgba(0,0,0,0.6);
+}
+
+header p{
+
+max-width:520px;
+
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+
+padding:15px 22px;
+
+border-radius:16px;
+
+font-size:1.1rem;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* =====================
+NAV
+===================== */
+
+nav{
+
+position:sticky;
+top:0;
+
+z-index:20;
+
+background:rgba(20,20,20,0.9);
+backdrop-filter:blur(10px);
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+nav a{
+
+color:#f1f5f9;
+
+margin:0 16px;
+
+text-decoration:none;
+
+font-size:0.95rem;
+
+position:relative;
+
+transition:0.3s;
+}
+
+nav a::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+bottom:-5px;
+
+width:0%;
+height:2px;
+
+background:white;
+
+transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+nav a:hover{
+color:#ffffff;
+}
+
+/* =====================
+SECTIONS
+===================== */
+
+section{
+
+max-width:900px;
+
+margin:60px auto;
+
+padding:40px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,0.95);
+
+box-shadow:0 20px 50px rgba(0,0,0,0.35);
+
+transition:0.35s ease;
+}
+
+section:hover{
+
+transform:translateY(-6px) scale(1.01);
+
+box-shadow:0 30px 60px rgba(0,0,0,0.45);
+}
+
+section h2{
+
+font-family:"Playfair Display",serif;
+
+margin-bottom:14px;
+
+font-size:1.6rem;
+}
+
+section h2::after{
+
+content:"";
+
+display:block;
+
+width:50px;
+
+height:3px;
+
+background:#111;
+
+margin-top:8px;
+
+border-radius:2px;
+
+opacity:0.7;
+}
+
+section p{
+margin-bottom:12px;
+color:#374151;
+}
+
+/* =====================
+FOOTER
+===================== */
+
+footer{
+
+text-align:center;
+
+color:#e5e7eb;
+
+padding:30px;
+
+font-size:0.9rem;
+
+opacity:0.8;
+}
+
+/* =====================
+TARTUFFE
+===================== */
+
+.tartuffe{
+
+position:fixed;
+
+bottom:25px;
+right:25px;
+
+cursor:pointer;
+
+z-index:999;
+
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%,100%{transform:translateY(0)}
+
+50%{transform:translateY(-8px)}
+
+}
+
+.tartuffe img{
+
+width:110px;
+
+filter:drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+
+transition:0.3s;
+}
+
+.tartuffe:hover img{
+transform:scale(1.07);
+}
+
+.tartuffe-bubble{
+
+position:absolute;
+
+bottom:120%;
+right:0;
+
+background:white;
+
+color:#1f2933;
+
+padding:10px 15px;
+
+border-radius:14px;
+
+font-size:0.9rem;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+
+white-space:nowrap;
+
+opacity:0;
+
+pointer-events:none;
+
+transform:translateY(10px);
+
+transition:0.3s ease;
+}
+
+.tartuffe.show .tartuffe-bubble{
+
+opacity:1;
+
+transform:translateY(0);
+}
+
+/* =====================
+SCROLL BUTTON
+===================== */
+
+#scrollTopBtn{
+
+position:fixed;
+
+bottom:25px;
+left:25px;
+
+width:48px;
+height:48px;
+
+border:none;
+
+border-radius:50%;
+
+background:rgba(255,255,255,0.15);
+
+backdrop-filter:blur(12px);
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+
+opacity:0;
+
+pointer-events:none;
+
+transform:translateY(15px);
+
+transition:all 0.35s ease;
+
+z-index:999;
+}
+
+#scrollTopBtn.show{
+
+opacity:1;
+
+pointer-events:auto;
+
+transform:translateY(0);
+}
+
+#scrollTopBtn:hover{
+
+background:white;
+
+color:black;
+
+transform:scale(1.1);
+}
+
+/* =====================
+MOBILE
+===================== */
+
+@media(max-width:600px){
+
+section{
+margin:30px 15px;
+padding:25px;
+}
+
+header h1{
+font-size:2.2rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Lyon</h1>
+<p>Lyon, ville historique située entre deux fleuves, est célèbre pour son patrimoine exceptionnel, sa tradition de la soie et sa gastronomie renommée.</p>
+</header>
+
+<nav>
+<a href="#location">Localisation</a>
+<a href="#story">Histoire</a>
+<a href="#culture">Culture</a>
+<a href="#gastronomie">Gastronomie</a>
+<a href="#characteristics">Caractéristiques</a>
+<a href="francemap.html">Kthehu</a>
+</nav>
+
+<section id="location">
+<h2>Localisation</h2>
+<p>
+Lyon se situe dans le centre-est de la France, dans la région Auvergne-Rhône-Alpes. La ville est construite au confluent du Rhône et de la Saône, ce qui lui a donné une position stratégique depuis l’Antiquité. Elle est entourée de collines célèbres, notamment Fourvière et la Croix-Rousse. Grâce à sa situation géographique, Lyon a longtemps été un grand carrefour commercial entre le nord et le sud de l’Europe.
+</p>
+</section>
+
+<section id="story">
+<h2>Histoire</h2>
+<p>
+Sur le plan historique, Lyon possède un passé très riche. Fondée à l’époque romaine sous le nom de Lugdunum, elle est devenue l’une des villes majeures de la Gaule. Son centre historique, qui comprend notamment le Vieux Lyon, Fourvière, la Presqu’île et les pentes de la Croix-Rousse, est inscrit au patrimoine mondial de l’UNESCO depuis 1998. La ville conserve aujourd’hui de nombreuses traces visibles de différentes époques : romaine, médiévale, Renaissance et moderne.
+</p>
+</section>
+
+<section id="culture">
+<h2>Culture</h2>
+<p>
+Lyon est reconnue comme une ville de culture et de patrimoine. Elle est célèbre pour ses traboules, passages couverts qui relient certaines rues et cours intérieures. Le Vieux Lyon possède une architecture Renaissance remarquable, tandis que les musées et les festivals témoignent du dynamisme artistique de la ville. Lyon est également liée à l’histoire de la soie, notamment dans le quartier de la Croix-Rousse, ancien centre des canuts, les ouvriers tisserands.
+</p>
+</section>
+
+<section id="gastronomie">
+<h2>Gastronomie</h2>
+<p>
+La gastronomie lyonnaise est l’une des plus réputées de France. Lyon est souvent considérée comme une véritable capitale culinaire. On y trouve les célèbres bouchons lyonnais, restaurants traditionnels où l’on sert des spécialités locales comme la quenelle, le tablier de sapeur, la rosette, le saucisson chaud, la salade lyonnaise ou encore la tarte à la praline. Cette richesse culinaire contribue fortement à l’identité et à la renommée de la ville.
+</p>
+</section>
+
+<section id="characteristics">
+<h2>Caractéristiques</h2>
+<p>
+Ce qui caractérise Lyon : une grande ville historique située au croisement de deux fleuves, connue pour son patrimoine inscrit à l’UNESCO, son héritage lié à la soie et son excellence gastronomique qui attire des visiteurs du monde entier.
+</p>
+</section>
+
+<footer>
+<p>&copy; Gjimnazi “Muharrem Çollaku”. Tous droits réservés.</p>
+</footer>
+
+<button id="scrollTopBtn">↑</button>
+
+<div class="tartuffe"
+onmouseenter="this.classList.add('show')"
+onmouseleave="this.classList.remove('show')"
+onclick="this.classList.toggle('show')">
+
+<div class="tartuffe-bubble">
+Découvrez la beauté et les merveilles de la France
+</div>
+
+<a href="Moliere" target="_blank">
+<img src="https://uploads.onecompiler.io/43arb5wzh/448vzmv43/Tartuffe.png">
+</a>
+
+</div>
+
+<script>
+
+const scrollBtn=document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>400){
+scrollBtn.classList.add("show");
+}else{
+scrollBtn.classList.remove("show");
+}
+
+});
+
+scrollBtn.addEventListener("click",()=>{
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+
+</script>
+
+</body>
+</html>
