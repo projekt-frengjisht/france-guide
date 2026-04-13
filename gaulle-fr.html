@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charles de Gaulle</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--text-gradient:linear-gradient(90deg,#ffffff,#e5e7eb,#cbd5e1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#14171c,#1f252d,#2a3038);
+color:#e6e6e6;
+padding:100px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
+pointer-events:none;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04), transparent 40%);
+pointer-events:none;
+z-index:-1;
+}
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#14171c;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#3d4652,#9aa4b2);
+border-radius:10px;
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#8b9db6,#e2e8f0);
+z-index:1000;
+}
+
+.back{
+position:fixed;
+top:25px;
+left:25px;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+transition:.3s;
+}
+
+.back:hover{
+transform:translateY(-3px);
+background:rgba(255,255,255,0.1);
+}
+
+/* ALB BUTTON */
+.lang-btn{
+position:fixed;
+top:25px;
+right:25px;
+padding:10px 18px;
+border-radius:30px;
+text-decoration:none;
+font-size:14px;
+font-weight:500;
+color:white;
+
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.18);
+
+backdrop-filter:blur(10px);
+
+transition:all .3s ease;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.5),
+inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.lang-btn:hover{
+transform:translateY(-3px) scale(1.05);
+background:rgba(255,255,255,0.12);
+box-shadow:
+0 12px 30px rgba(0,0,0,0.7),
+0 0 10px rgba(200,210,230,0.2);
+}
+
+.hero{
+max-width:900px;
+width:100%;
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.7);
+transition:.4s;
+}
+
+.hero img:hover{
+transform:scale(1.04);
+}
+
+.hero h1{
+font-size:42px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.subtitle{
+opacity:0.7;
+font-size:15px;
+margin-top:5px;
+margin-bottom:20px;
+letter-spacing:1px;
+}
+
+.title-line{
+width:120px;
+height:2px;
+margin:10px auto 25px auto;
+background:var(--text-gradient);
+border-radius:2px;
+}
+
+.info-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:20px;
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+
+padding:22px;
+border-radius:16px;
+
+margin:30px 0 40px 0;
+}
+
+.info-box div{
+text-align:center;
+font-size:14px;
+opacity:0.9;
+line-height:1.4;
+}
+
+.navbar{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:22px;
+
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,0.15);
+
+padding:14px 24px;
+border-radius:20px;
+
+margin-bottom:60px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.navbar a{
+position:relative;
+text-decoration:none;
+color:#d1d5db;
+font-size:14px;
+padding:6px 2px;
+transition:.25s;
+}
+
+.navbar a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:var(--text-gradient);
+transition:.3s;
+}
+
+.navbar a:hover{
+color:white;
+}
+
+.navbar a:hover::after{
+width:100%;
+}
+
+.container{
+max-width:850px;
+width:100%;
+}
+
+.section{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:28px;
+margin-bottom:30px;
+
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.section:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:
+0 20px 45px rgba(0,0,0,0.8),
+0 0 15px rgba(200,210,230,0.15);
+}
+
+.section h2{
+font-size:24px;
+margin-bottom:12px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.section p{
+line-height:1.9;
+opacity:0.9;
+}
+
+.quote{
+text-align:center;
+font-size:28px;
+font-style:italic;
+padding:45px;
+margin:80px auto;
+max-width:700px;
+background:rgba(255,255,255,0.04);
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+.quote::before{
+content:"“";
+font-size:70px;
+position:absolute;
+top:-20px;
+left:25px;
+opacity:0.15;
+}
+
+.quote::after{
+content:"”";
+font-size:70px;
+position:absolute;
+bottom:-35px;
+right:25px;
+opacity:0.15;
+}
+
+footer{
+margin-top:40px;
+opacity:0.5;
+font-size:14px;
+text-align:center;
+}
+
+@media(max-width:700px){
+
+.hero img{
+height:260px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<a href="famouspeople.html" class="back">←</a>
+
+<!-- ALB BUTTON -->
+<a href="gaulle-alb.html" class="lang-btn">ALB</a>
+
+<section class="hero">
+
+<img src="charlesg.png" alt="Charles de Gaulle">
+
+<h1>Charles de Gaulle</h1>
+
+<p class="subtitle">Général • Homme d'État • Président de la République</p>
+
+<div class="title-line"></div>
+
+<div class="info-box">
+
+<div><b>Naissance</b><br>1890, Lille</div>
+<div><b>Décès</b><br>1970</div>
+<div><b>Rôle</b><br>Chef de la France libre</div>
+<div><b>Fonction</b><br>Président (1959-1969)</div>
+<div><b>République</b><br>Fondateur de la Vᵉ</div>
+<div><b>Événement</b><br>Appel du 18 Juin</div>
+
+</div>
+
+<div class="navbar">
+
+<a href="#naissance">Naissance</a>
+<a href="#guerre">Première Guerre</a>
+<a href="#resistance">Résistance</a>
+<a href="#president">Présidence</a>
+<a href="#politique">Politique</a>
+<a href="#heritage">Héritage</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<section class="section" id="naissance">
+<h2>🌍 Naissance et formation</h2>
+<p>
+Charles de Gaulle est né en 1890 à Lille, dans une famille
+très attachée à la culture, à l’éducation et aux valeurs
+patriotiques. Dès son enfance, il s’intéresse fortement
+à l’histoire de la France et au rôle de l’armée dans la
+défense de la nation. Après ses études, il choisit
+la carrière militaire et entre dans l’armée française,
+où il développe progressivement ses idées sur la stratégie
+et l’organisation moderne des forces armées.
+</p>
+</section>
+
+<section class="section" id="guerre">
+<h2>⚔️ Expérience de la Première Guerre mondiale</h2>
+<p>
+Pendant la Première Guerre mondiale, Charles de Gaulle
+sert comme officier dans l’armée française. Il participe
+à plusieurs combats importants et est fait prisonnier
+par les forces allemandes. Cette expérience marque
+profondément sa réflexion sur l’avenir militaire de la France.
+Après la guerre, il publie plusieurs analyses sur
+la modernisation de l’armée et sur l’importance
+des nouvelles stratégies militaires.
+</p>
+</section>
+
+<section class="section" id="resistance">
+<h2>📢 L’appel du 18 Juin</h2>
+<p>
+Lorsque la Seconde Guerre mondiale éclate, la France
+est rapidement vaincue par l’Allemagne nazie en 1940.
+Refusant d’accepter la défaite, Charles de Gaulle
+se rend à Londres et lance le célèbre appel du
+18 juin 1940 à la radio. Dans ce discours historique,
+il invite les Français à continuer la lutte contre
+l’occupation. Il devient alors le symbole de la
+France libre et de la résistance contre l’Allemagne.
+</p>
+</section>
+
+<div class="quote">
+La France a perdu une bataille, mais la France n'a pas perdu la guerre.
+</div>
+
+<section class="section" id="president">
+<h2>🏛 Fondation de la Cinquième République</h2>
+<p>
+Après la guerre, Charles de Gaulle joue un rôle
+important dans la reconstruction politique de la France.
+Cependant, il quitte temporairement le pouvoir avant
+de revenir en 1958 pendant une période de grande crise
+politique. Il fonde alors la Cinquième République,
+un nouveau système politique qui renforce le rôle
+du président. Il devient le premier président
+de cette nouvelle République.
+</p>
+</section>
+
+<section class="section" id="politique">
+<h2>🌍 Politique et décisions majeures</h2>
+<p>
+Pendant sa présidence, Charles de Gaulle cherche
+à moderniser la France et à renforcer son indépendance
+sur la scène internationale. Il mène une politique
+étrangère originale, visant à affirmer l’autonomie
+du pays face aux grandes puissances. Il prend aussi
+des décisions importantes concernant la décolonisation,
+notamment en accordant l’indépendance à l’Algérie,
+ce qui provoque de nombreux débats et tensions
+dans la société française.
+</p>
+</section>
+
+<section class="section" id="heritage">
+<h2>🕊 Héritage historique</h2>
+<p>
+Charles de Gaulle quitte le pouvoir en 1969 après
+un référendum perdu. Aujourd’hui, il reste l’une
+des figures politiques les plus respectées
+de l’histoire de la France. Beaucoup le considèrent
+comme l’homme du refus de la défaite,
+le défenseur de la dignité nationale
+et l’architecte de la stabilité politique
+de la France moderne.
+</p>
+</section>
+
+</div>
+
+<footer>
+
+© Tous droits réservés —
+Gjimnazi "Muharrem Çollaku"
+
+</footer>
+
+<script>
+
+window.onscroll=function(){
+
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+
+document.getElementById("progress").style.width=scrolled+"%";
+
+};
+
+const sections=document.querySelectorAll(".section");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
+
+</body>
+</html>
