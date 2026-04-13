@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeanne d’Arc</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--text-gradient:linear-gradient(90deg,#ffffff,#e5e7eb,#cbd5e1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#14171c,#1f252d,#2a3038);
+color:#e6e6e6;
+padding:100px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
+pointer-events:none;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04), transparent 40%);
+pointer-events:none;
+z-index:-1;
+}
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#14171c;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#3d4652,#9aa4b2);
+border-radius:10px;
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#8b9db6,#e2e8f0);
+z-index:1000;
+}
+
+.back{
+position:fixed;
+top:25px;
+left:25px;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+transition:.3s;
+}
+
+.back:hover{
+transform:translateY(-3px);
+background:rgba(255,255,255,0.1);
+}
+
+/* FRC BUTTON */
+.lang-btn{
+position:fixed;
+top:25px;
+right:25px;
+padding:10px 18px;
+border-radius:30px;
+text-decoration:none;
+font-size:14px;
+font-weight:500;
+color:white;
+
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.18);
+
+backdrop-filter:blur(10px);
+
+transition:all .3s ease;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.5),
+inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.lang-btn:hover{
+transform:translateY(-3px) scale(1.05);
+background:rgba(255,255,255,0.12);
+box-shadow:
+0 12px 30px rgba(0,0,0,0.7),
+0 0 10px rgba(200,210,230,0.2);
+}
+
+.hero{
+max-width:900px;
+width:100%;
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.7);
+transition:.4s;
+}
+
+.hero img:hover{
+transform:scale(1.04);
+}
+
+.hero h1{
+font-size:42px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.subtitle{
+opacity:0.7;
+font-size:15px;
+margin-top:5px;
+margin-bottom:20px;
+letter-spacing:1px;
+}
+
+.title-line{
+width:120px;
+height:2px;
+margin:10px auto 25px auto;
+background:var(--text-gradient);
+border-radius:2px;
+}
+
+.info-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:20px;
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+
+padding:22px;
+border-radius:16px;
+
+margin:30px 0 40px 0;
+}
+
+.info-box div{
+text-align:center;
+font-size:14px;
+opacity:0.9;
+line-height:1.4;
+}
+
+.navbar{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:22px;
+
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,0.15);
+
+padding:14px 24px;
+border-radius:20px;
+
+margin-bottom:60px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.navbar a{
+position:relative;
+text-decoration:none;
+color:#d1d5db;
+font-size:14px;
+padding:6px 2px;
+transition:.25s;
+}
+
+.navbar a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:var(--text-gradient);
+transition:.3s;
+}
+
+.navbar a:hover{
+color:white;
+}
+
+.navbar a:hover::after{
+width:100%;
+}
+
+.container{
+max-width:850px;
+width:100%;
+}
+
+.section{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:28px;
+margin-bottom:30px;
+
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.section:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:
+0 20px 45px rgba(0,0,0,0.8),
+0 0 15px rgba(200,210,230,0.15);
+}
+
+.section h2{
+font-size:24px;
+margin-bottom:12px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.section p{
+line-height:1.9;
+opacity:0.9;
+}
+
+.quote{
+text-align:center;
+font-size:28px;
+font-style:italic;
+padding:45px;
+margin:80px auto;
+max-width:700px;
+background:rgba(255,255,255,0.04);
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+.quote::before{
+content:"“";
+font-size:70px;
+position:absolute;
+top:-20px;
+left:25px;
+opacity:0.15;
+}
+
+.quote::after{
+content:"”";
+font-size:70px;
+position:absolute;
+bottom:-35px;
+right:25px;
+opacity:0.15;
+}
+
+footer{
+margin-top:40px;
+opacity:0.5;
+font-size:14px;
+text-align:center;
+}
+
+@media(max-width:700px){
+
+.hero img{
+height:260px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<a href="famouspeople.html" class="back">←</a>
+
+<!-- FRC BUTTON -->
+<a href="jeanne-frc.html" class="lang-btn">FRC</a>
+
+<section class="hero">
+
+<img src="jeannearc.png" alt="Jeanne d’Arc">
+
+<h1>Jeanne d’Arc</h1>
+
+<p class="subtitle">Heroinë kombëtare • Udhëheqëse ushtarake • Shenjtore</p>
+
+<div class="title-line"></div>
+
+<div class="info-box">
+
+<div><b>Lindja</b><br>rreth 1412, Domrémy</div>
+<div><b>Vdekja</b><br>1431, Rouen</div>
+<div><b>Roli</b><br>Udhëheqëse ushtarake</div>
+<div><b>Konteksti</b><br>Lufta Njëqindvjeçare</div>
+<div><b>Misioni</b><br>Mbështetje për Charles VII</div>
+<div><b>Shenjtërimi</b><br>1920</div>
+
+</div>
+
+<div class="navbar">
+
+<a href="#naissance">Lindja</a>
+<a href="#mission">Misioni</a>
+<a href="#victoire">Fitorja</a>
+<a href="#capture">Kapja</a>
+<a href="#heritage">Trashëgimia</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<section class="section" id="naissance">
+<h2>🌍 Lindja dhe rinia</h2>
+<p>
+Jeanne d’Arc lindi rreth vitit 1412 në fshatin Domrémy, në lindje të Francës,
+në një familje të thjeshtë fshatare. Ajo u rrit në një periudhë shumë të vështirë,
+pasi Franca ishte e përfshirë në Luftën Njëqindvjeçare kundër Anglisë.
+Që në moshë të vogël, Jeanne njihej për përkushtimin e saj fetar dhe besimin e thellë.
+Ajo kalonte shumë kohë duke u lutur dhe zhvilloi herët një ndjenjë të fortë
+besnikërie ndaj vendit dhe fesë së saj.
+</p>
+</section>
+
+<section class="section" id="mission">
+<h2>✝️ Një mision fetar</h2>
+<p>
+Sipas dëshmive të saj, Jeanne pohonte se dëgjonte zëra shenjtorësh
+që i kërkonin të ndihmonte Francën dhe të mbështeste delfinin Charles,
+trashëgimtarin e fronit. Ajo ishte e bindur se kishte një mision hyjnor
+për të shpëtuar vendin e saj. Pavarësisht moshës së re dhe mungesës së
+përvojës ushtarake, ajo vendosi të veprojë dhe kërkoi të takonte
+drejtuesit e mbretërisë për të bindur Charles-in t’i besonte.
+</p>
+</section>
+
+<section class="section" id="victoire">
+<h2>⚔️ Çlirimi i Orléans-it</h2>
+<p>
+Pas shumë vështirësish, Jeanne arriti të takonte delfinin Charles.
+I impresionuar nga vendosmëria e saj, ai i dha besimin e tij.
+Në vitin 1429, Jeanne mori pjesë në çlirimin e qytetit të Orléans-it,
+i cili ishte i pushtuar nga anglezët. Kjo fitore shënoi një kthesë
+të rëndësishme në luftë dhe i dha shpresë popullit francez.
+Më pas, ajo shoqëroi Charles-in deri në qytetin e Reims-it,
+ku ai u kurorëzua mbret i Francës me emrin Charles VII.
+</p>
+</section>
+
+<div class="quote">
+Jeanne d’Arc u bë një simbol i guximit dhe besimit në historinë e Francës.
+</div>
+
+<section class="section" id="capture">
+<h2>⚖️ Kapja dhe gjyqi</h2>
+<p>
+Situata e Jeanne ndryshoi shpejt. Në vitin 1430,
+ajo u kap nga burgundët, aleatë të anglezëve.
+Më pas iu dorëzua armiqve të saj dhe u gjykua në Rouen
+në një proces fetar dhe politik. E akuzuar për herezi
+dhe krime të tjera, ajo u dënua me vdekje.
+Në vitin 1431, në moshën vetëm 19-vjeçare,
+Jeanne d’Arc u ekzekutua duke u djegur.
+</p>
+</section>
+
+<section class="section" id="heritage">
+<h2>🕊 Trashëgimia dhe njohja</h2>
+<p>
+Pas vdekjes së saj, imazhi i Jeanne d’Arc ndryshoi thellësisht.
+Ajo u bë një simbol i guximit, besimit dhe patriotizmit për Francën.
+Disa vite më vonë, një proces i ri njohu pafajësinë e saj.
+Në vitin 1920, Kisha Katolike e shpalli zyrtarisht shenjtore,
+dhe sot ajo konsiderohet një heroinë kombëtare franceze
+dhe një nga figurat më të njohura në historinë e vendit.
+</p>
+</section>
+
+</div>
+
+<footer>
+
+© Tous droits réservés —
+Gjimnazi "Muharrem Çollaku"
+
+</footer>
+
+<script>
+
+window.onscroll=function(){
+
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+
+document.getElementById("progress").style.width=scrolled+"%";
+
+};
+
+const sections=document.querySelectorAll(".section");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
+
+</body>
+</html>
