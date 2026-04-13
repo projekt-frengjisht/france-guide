@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Édith Piaf</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--text-gradient:linear-gradient(90deg,#ffffff,#e5e7eb,#cbd5e1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#14171c,#1f252d,#2a3038);
+color:#e6e6e6;
+padding:100px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+}
+
+/* FLOATING BACKGROUND */
+
+body::before{
+content:"";
+position:fixed;
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
+pointer-events:none;
+z-index:-1;
+animation:floatbg 18s ease-in-out infinite;
+}
+
+@keyframes floatbg{
+0%{transform:translateX(-50%) translateY(0px);}
+50%{transform:translateX(-50%) translateY(40px);}
+100%{transform:translateX(-50%) translateY(0px);}
+}
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04), transparent 40%);
+pointer-events:none;
+z-index:-1;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#14171c;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#3d4652,#9aa4b2);
+border-radius:10px;
+}
+
+/* PROGRESS BAR */
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#8b9db6,#e2e8f0);
+z-index:1000;
+}
+
+/* BACK BUTTON */
+
+.back{
+position:fixed;
+top:25px;
+left:25px;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+transition:.3s;
+}
+
+.back:hover{
+transform:translateY(-3px);
+background:rgba(255,255,255,0.1);
+}
+
+/* LANGUAGE BUTTON */
+
+.lang-btn{
+position:fixed;
+top:25px;
+right:25px;
+padding:10px 16px;
+border-radius:20px;
+text-decoration:none;
+font-size:13px;
+color:white;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+transition:.3s;
+}
+
+.lang-btn:hover{
+background:rgba(255,255,255,0.1);
+transform:translateY(-2px);
+}
+
+/* HERO */
+
+.hero{
+max-width:900px;
+width:100%;
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.7);
+transition:.4s;
+animation:fadeIn 1.2s ease;
+}
+
+.hero img:hover{
+transform:scale(1.04);
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:scale(1.05);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+.hero h1{
+font-size:42px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.subtitle{
+opacity:0.7;
+font-size:15px;
+margin-top:5px;
+margin-bottom:20px;
+letter-spacing:1px;
+}
+
+.title-line{
+width:120px;
+height:2px;
+margin:10px auto 25px auto;
+background:var(--text-gradient);
+border-radius:2px;
+}
+
+/* INFO BOX */
+
+.info-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:20px;
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+
+padding:22px;
+border-radius:16px;
+
+margin:30px 0 40px 0;
+}
+
+.info-box div{
+text-align:center;
+font-size:14px;
+opacity:0.9;
+line-height:1.4;
+transition:.3s;
+}
+
+.info-box div:hover{
+transform:translateY(-4px);
+color:white;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:22px;
+
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,0.15);
+
+padding:14px 24px;
+border-radius:20px;
+
+margin-bottom:60px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.navbar a{
+position:relative;
+text-decoration:none;
+color:#d1d5db;
+font-size:14px;
+padding:6px 2px;
+transition:.25s;
+}
+
+.navbar a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:var(--text-gradient);
+transition:.3s;
+}
+
+.navbar a:hover{
+color:white;
+}
+
+.navbar a:hover::after{
+width:100%;
+}
+
+/* CONTENT */
+
+.container{
+max-width:850px;
+width:100%;
+}
+
+.section{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:28px;
+margin-bottom:30px;
+
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.section:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:
+0 20px 45px rgba(0,0,0,0.8),
+0 0 15px rgba(200,210,230,0.15);
+}
+
+.section h2{
+font-size:24px;
+margin-bottom:12px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.section p{
+line-height:1.9;
+opacity:0.9;
+}
+
+/* QUOTE */
+
+.quote{
+text-align:center;
+font-size:28px;
+font-style:italic;
+padding:45px;
+margin:80px auto;
+max-width:700px;
+background:rgba(255,255,255,0.04);
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+.quote::before{
+content:"“";
+font-size:70px;
+position:absolute;
+top:-20px;
+left:25px;
+opacity:0.15;
+}
+
+.quote::after{
+content:"”";
+font-size:70px;
+position:absolute;
+bottom:-35px;
+right:25px;
+opacity:0.15;
+}
+
+footer{
+margin-top:40px;
+opacity:0.5;
+font-size:14px;
+text-align:center;
+}
+
+@media(max-width:700px){
+
+.hero img{
+height:260px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<a href="famouspeople.html" class="back">←</a>
+
+<a href="edith-alb.html" class="lang-btn">ALB</a>
+
+<section class="hero">
+
+<img src="edith.png" alt="Édith Piaf">
+
+<h1>Édith Piaf</h1>
+
+<p class="subtitle">Chanteuse • Icône de la chanson française</p>
+
+<div class="title-line"></div>
+
+<div class="info-box">
+
+<div><b>Naissance</b><br>1915, Paris</div>
+<div><b>Décès</b><br>1963</div>
+<div><b>Profession</b><br>Chanteuse</div>
+<div><b>Surnom</b><br>La Môme Piaf</div>
+<div><b>Chansons</b><br>La Vie en rose</div>
+<div><b>Influence</b><br>Musique française</div>
+
+</div>
+
+<div class="navbar">
+
+<a href="#naissance">Naissance</a> <a href="#debut">Débuts</a> <a href="#chansons">Chansons</a> <a href="#carriere">Carrière</a> <a href="#heritage">Héritage</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<section class="section" id="naissance">
+<h2>🌍 Naissance et enfance</h2>
+<p>
+Édith Piaf est née en 1915 à Paris. Son enfance est marquée par la pauvreté
+et par de nombreuses difficultés familiales. Elle grandit dans un environnement
+instable et connaît très tôt les épreuves de la vie. Malgré ces conditions
+difficiles, la musique devient progressivement une force essentielle
+dans son existence.
+</p>
+</section>
+
+<section class="section" id="debut">
+<h2>🎤 Les débuts dans la rue</h2>
+<p>
+Dans sa jeunesse, Édith Piaf commence à chanter dans les rues de Paris.
+Sa voix attire rapidement l’attention, car elle est à la fois puissante,
+émotive et profondément sincère. Un producteur découvre son talent
+et l’aide à entrer dans le monde du spectacle. Son nom artistique,
+« Piaf », qui signifie « moineau » dans l’argot parisien, correspond
+bien à sa petite silhouette et à son énergie remarquable.
+</p>
+</section>
+
+<section class="section" id="chansons">
+<h2>🎶 Des chansons inoubliables</h2>
+<p>
+Édith Piaf chante des thèmes universels comme l’amour,
+la douleur, la perte et l’espoir. Ses interprétations
+touchent profondément le public. Parmi ses chansons
+les plus célèbres figurent <b>La Vie en rose</b>,
+<b>Non, je ne regrette rien</b> et <b>Hymne à l’amour</b>.
+Ces œuvres deviennent des symboles de la chanson française.
+</p>
+</section>
+
+<div class="quote">
+Non, rien de rien… Non, je ne regrette rien.
+</div>
+
+<section class="section" id="carriere">
+<h2>⭐ Une carrière exceptionnelle</h2>
+<p>
+Au cours de sa carrière, Édith Piaf devient l’une des voix
+les plus célèbres de la musique française. Malgré les
+difficultés personnelles et les tragédies qu’elle traverse,
+elle continue à chanter avec une intensité et une sincérité
+qui impressionnent le public. Son style unique et sa présence
+sur scène marquent profondément l’histoire de la musique.
+</p>
+</section>
+
+<section class="section" id="heritage">
+<h2>🕊 Héritage</h2>
+<p>
+Aujourd’hui encore, les chansons d’Édith Piaf sont connues
+et écoutées dans le monde entier. Elle représente une
+part importante de l’âme musicale de Paris et de la France.
+Son héritage artistique continue d’influencer de nombreux
+chanteurs et artistes de différentes générations.
+</p>
+</section>
+
+</div>
+
+<footer>
+
+© Tous droits réservés —
+Gjimnazi "Muharrem Çollaku"
+
+</footer>
+
+<script>
+
+window.onscroll=function(){
+
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+
+document.getElementById("progress").style.width=scrolled+"%";
+
+};
+
+const sections=document.querySelectorAll(".section");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
+
+</body>
+</html>
