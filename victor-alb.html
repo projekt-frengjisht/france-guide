@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="sq">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Hugo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--text-gradient:linear-gradient(90deg,#ffffff,#e5e7eb,#cbd5e1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#14171c,#1f252d,#2a3038);
+color:#e6e6e6;
+padding:100px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
+pointer-events:none;
+z-index:-1;
+animation:floatbg 18s ease-in-out infinite;
+}
+
+@keyframes floatbg{
+0%{transform:translateX(-50%) translateY(0px);}
+50%{transform:translateX(-50%) translateY(40px);}
+100%{transform:translateX(-50%) translateY(0px);}
+}
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04), transparent 40%);
+pointer-events:none;
+z-index:-1;
+}
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#14171c;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#3d4652,#9aa4b2);
+border-radius:10px;
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#8b9db6,#e2e8f0);
+z-index:1000;
+}
+
+.back{
+position:fixed;
+top:25px;
+left:25px;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+transition:.3s;
+}
+
+.back:hover{
+transform:translateY(-3px);
+background:rgba(255,255,255,0.1);
+}
+
+/* LANGUAGE BUTTON */
+
+.lang-btn{
+position:fixed;
+top:25px;
+right:25px;
+padding:8px 14px;
+border-radius:12px;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.2);
+color:white;
+text-decoration:none;
+font-size:13px;
+transition:.3s;
+}
+
+.lang-btn:hover{
+background:rgba(255,255,255,0.12);
+}
+
+.hero{
+max-width:900px;
+width:100%;
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.7);
+transition:.4s;
+animation:fadeIn 1.2s ease;
+}
+
+.hero img:hover{
+transform:scale(1.04);
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:scale(1.05);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+.hero h1{
+font-size:42px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.subtitle{
+opacity:0.7;
+font-size:15px;
+margin-top:5px;
+margin-bottom:20px;
+letter-spacing:1px;
+}
+
+.title-line{
+width:120px;
+height:2px;
+margin:10px auto 25px auto;
+background:var(--text-gradient);
+border-radius:2px;
+}
+
+.info-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:20px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+padding:22px;
+border-radius:16px;
+margin:30px 0 40px 0;
+}
+
+.info-box div{
+text-align:center;
+font-size:14px;
+opacity:0.9;
+line-height:1.4;
+transition:.3s;
+}
+
+.info-box div:hover{
+transform:translateY(-4px);
+color:white;
+}
+
+.navbar{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:22px;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.15);
+padding:14px 24px;
+border-radius:20px;
+margin-bottom:60px;
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.navbar a{
+position:relative;
+text-decoration:none;
+color:#d1d5db;
+font-size:14px;
+padding:6px 2px;
+transition:.25s;
+}
+
+.navbar a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:var(--text-gradient);
+transition:.3s;
+}
+
+.navbar a:hover{
+color:white;
+}
+
+.navbar a:hover::after{
+width:100%;
+}
+
+.container{
+max-width:850px;
+width:100%;
+}
+
+.section{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:28px;
+margin-bottom:30px;
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.section:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:
+0 20px 45px rgba(0,0,0,0.8),
+0 0 15px rgba(200,210,230,0.15);
+}
+
+.section h2{
+font-size:24px;
+margin-bottom:12px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.section p{
+line-height:1.9;
+opacity:0.9;
+}
+
+.quote{
+text-align:center;
+font-size:28px;
+font-style:italic;
+padding:45px;
+margin:80px auto;
+max-width:700px;
+background:rgba(255,255,255,0.04);
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+.quote::before{
+content:"“";
+font-size:70px;
+position:absolute;
+top:-20px;
+left:25px;
+opacity:0.15;
+}
+
+.quote::after{
+content:"”";
+font-size:70px;
+position:absolute;
+bottom:-35px;
+right:25px;
+opacity:0.15;
+}
+
+footer{
+margin-top:40px;
+opacity:0.5;
+font-size:14px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<a href="famouspeople.html" class="back">←</a>
+
+<a href="victor-fr.html" class="lang-btn">FR</a>
+
+<section class="hero">
+
+<img src="victor.png" alt="Victor Hugo">
+
+<h1>Victor Hugo</h1>
+
+<p class="subtitle">Shkrimtar • Poet • Figurë kryesore e romantizmit</p>
+
+<div class="title-line"></div>
+
+<div class="info-box">
+
+<div><b>Lindja</b><br>1802, Besançon</div>
+<div><b>Vdekja</b><br>1885</div>
+<div><b>Profesioni</b><br>Shkrimtar</div>
+<div><b>Lëvizja</b><br>Romantizmi</div>
+<div><b>Veprat</b><br>Të Mjerët, Notre-Dame de Paris</div>
+<div><b>Angazhimi</b><br>Drejtësi sociale</div>
+
+</div>
+
+<div class="navbar">
+
+<a href="#naissance">Lindja</a>
+<a href="#romantisme">Romantizmi</a>
+<a href="#oeuvres">Veprat</a>
+<a href="#engagement">Angazhimi</a>
+<a href="#heritage">Trashëgimia</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<section class="section" id="naissance">
+<h2>🌍 Lindja dhe rinia</h2>
+<p>
+Victor Hugo lindi në vitin 1802 në Besançon. Që në moshë të re, ai tregoi një talent të madh për shkrimin dhe
+një interes të thellë për letërsinë. Fëmijëria e tij u shënua nga lëvizjet e shumta të familjes,
+gjë që i dha mundësinë të njihte qytete dhe kultura të ndryshme. Këto përvoja ndikuan më vonë
+në imagjinatën e tij dhe pasuruan veprën e tij letrare.
+</p>
+</section>
+
+<section class="section" id="romantisme">
+<h2>🎭 Një figurë e romantizmit</h2>
+<p>
+Victor Hugo u bë shpejt një nga figurat kryesore të romantizmit në Francë.
+Ky lëvizje artistike synonte të çlironte krijimtarinë dhe të shprehte më shumë emocionet njerëzore.
+Nëpërmjet shkrimeve të tij, Hugo solli një mënyrë të re të konceptimit të letërsisë,
+më ekspresive, më të lirë dhe thellësisht të ndikuar nga ndjeshmëria dhe imagjinata.
+</p>
+</section>
+
+<section class="section" id="oeuvres">
+<h2>📚 Veprat kryesore</h2>
+<p>
+Victor Hugo shkroi në disa zhanre letrare: poezi, teatër dhe roman. Ndër veprat e tij më të njohura janë
+<b>Notre-Dame de Paris</b> dhe <b>Të Mjerët</b>.
+Në këto libra, ai trajton tema universale si drejtësia, varfëria,
+dashuria, vuajtja dhe shpresa. Personazhet dhe historitë e tij përshkruajnë
+me forcë realitetet shoqërore të kohës së tij.
+</p>
+</section>
+
+<div class="quote">
+Ata që jetojnë janë ata që luftojnë.
+</div>
+
+<section class="section" id="engagement">
+<h2>⚖️ Angazhimi politik</h2>
+<p>
+Victor Hugo u angazhua gjithashtu në jetën politike të vendit të tij. Ai mbrojti ide humaniste
+dhe luftoi kundër padrejtësisë sociale dhe dënimit me vdekje. Për shkak të qëndrimeve të tij politike,
+ai u detyrua të jetonte për disa vite në mërgim. Gjatë kësaj periudhe, ai vazhdoi të shkruante
+dhe të mbronte bindjet e tij përmes veprave të tij.
+</p>
+</section>
+
+<section class="section" id="heritage">
+<h2>🕊 Trashëgimia</h2>
+<p>
+Kur Victor Hugo vdiq në vitin 1885, Franca i bëri një nderim të madh kombëtar.
+Qindra mijëra njerëz morën pjesë në funeralin e tij.
+Ai u varros në Panteon në Paris. Edhe sot, veprat e tij lexohen
+në mbarë botën dhe ai mbetet një nga simbolet më të rëndësishme
+të letërsisë franceze dhe të luftës për dinjitetin njerëzor.
+</p>
+</section>
+
+</div>
+
+<footer>
+
+© Të gjitha të drejtat e rezervuara —
+Gjimnazi "Muharrem Çollaku"
+
+</footer>
+
+<script>
+
+window.onscroll=function(){
+
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+
+document.getElementById("progress").style.width=scrolled+"%";
+
+};
+
+const sections=document.querySelectorAll(".section");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
+
+</body>
+</html>
