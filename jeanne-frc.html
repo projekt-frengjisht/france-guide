@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeanne d’Arc</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--text-gradient:linear-gradient(90deg,#ffffff,#e5e7eb,#cbd5e1);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#14171c,#1f252d,#2a3038);
+color:#e6e6e6;
+padding:100px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(255,255,255,0.08),transparent 70%);
+pointer-events:none;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04), transparent 40%);
+pointer-events:none;
+z-index:-1;
+}
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#14171c;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#3d4652,#9aa4b2);
+border-radius:10px;
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#8b9db6,#e2e8f0);
+z-index:1000;
+}
+
+.back{
+position:fixed;
+top:25px;
+left:25px;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+transition:.3s;
+}
+
+.back:hover{
+transform:translateY(-3px);
+background:rgba(255,255,255,0.1);
+}
+
+/* NEW ALB BUTTON */
+.lang-btn{
+position:fixed;
+top:25px;
+right:25px;
+padding:10px 18px;
+border-radius:30px;
+text-decoration:none;
+font-size:14px;
+font-weight:500;
+color:white;
+
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.18);
+
+backdrop-filter:blur(10px);
+
+transition:all .3s ease;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.5),
+inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.lang-btn:hover{
+transform:translateY(-3px) scale(1.05);
+background:rgba(255,255,255,0.12);
+box-shadow:
+0 12px 30px rgba(0,0,0,0.7),
+0 0 10px rgba(200,210,230,0.2);
+}
+
+.hero{
+max-width:900px;
+width:100%;
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.7);
+transition:.4s;
+}
+
+.hero img:hover{
+transform:scale(1.04);
+}
+
+.hero h1{
+font-size:42px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.subtitle{
+opacity:0.7;
+font-size:15px;
+margin-top:5px;
+margin-bottom:20px;
+letter-spacing:1px;
+}
+
+.title-line{
+width:120px;
+height:2px;
+margin:10px auto 25px auto;
+background:var(--text-gradient);
+border-radius:2px;
+}
+
+.info-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:20px;
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+
+padding:22px;
+border-radius:16px;
+
+margin:30px 0 40px 0;
+}
+
+.info-box div{
+text-align:center;
+font-size:14px;
+opacity:0.9;
+line-height:1.4;
+}
+
+.navbar{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:22px;
+
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,0.15);
+
+padding:14px 24px;
+border-radius:20px;
+
+margin-bottom:60px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.6),
+inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.navbar a{
+position:relative;
+text-decoration:none;
+color:#d1d5db;
+font-size:14px;
+padding:6px 2px;
+transition:.25s;
+}
+
+.navbar a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:var(--text-gradient);
+transition:.3s;
+}
+
+.navbar a:hover{
+color:white;
+}
+
+.navbar a:hover::after{
+width:100%;
+}
+
+.container{
+max-width:850px;
+width:100%;
+}
+
+.section{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:28px;
+margin-bottom:30px;
+
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.section:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:
+0 20px 45px rgba(0,0,0,0.8),
+0 0 15px rgba(200,210,230,0.15);
+}
+
+.section h2{
+font-size:24px;
+margin-bottom:12px;
+background:var(--text-gradient);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.section p{
+line-height:1.9;
+opacity:0.9;
+}
+
+.quote{
+text-align:center;
+font-size:28px;
+font-style:italic;
+padding:45px;
+margin:80px auto;
+max-width:700px;
+background:rgba(255,255,255,0.04);
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+.quote::before{
+content:"“";
+font-size:70px;
+position:absolute;
+top:-20px;
+left:25px;
+opacity:0.15;
+}
+
+.quote::after{
+content:"”";
+font-size:70px;
+position:absolute;
+bottom:-35px;
+right:25px;
+opacity:0.15;
+}
+
+footer{
+margin-top:40px;
+opacity:0.5;
+font-size:14px;
+text-align:center;
+}
+
+@media(max-width:700px){
+
+.hero img{
+height:260px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<a href="famouspeople.html" class="back">←</a>
+
+<!-- NEW ALB BUTTON -->
+<a href="jeanne-alb.html" class="lang-btn">ALB</a>
+
+<section class="hero">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Joan_of_Arc_miniature_graded.jpg/640px-Joan_of_Arc_miniature_graded.jpg" alt="Jeanne d’Arc">
+
+<h1>Jeanne d’Arc</h1>
+
+<p class="subtitle">Héroïne nationale • Cheffe militaire • Sainte</p>
+
+<div class="title-line"></div>
+
+<div class="info-box">
+
+<div><b>Naissance</b><br>vers 1412, Domrémy</div>
+<div><b>Décès</b><br>1431, Rouen</div>
+<div><b>Rôle</b><br>Cheffe militaire</div>
+<div><b>Contexte</b><br>Guerre de Cent Ans</div>
+<div><b>Mission</b><br>Soutien à Charles VII</div>
+<div><b>Canonisation</b><br>1920</div>
+
+</div>
+
+<div class="navbar">
+
+<a href="#naissance">Naissance</a>
+<a href="#mission">Mission</a>
+<a href="#victoire">Victoire</a>
+<a href="#capture">Capture</a>
+<a href="#heritage">Héritage</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<section class="section" id="naissance">
+<h2>🌍 Naissance et jeunesse</h2>
+<p>
+Jeanne d’Arc est née vers 1412 dans le village de Domrémy, dans l’est de la France,
+au sein d’une famille paysanne modeste. Elle grandit dans un contexte très difficile,
+car la France est plongée dans la guerre de Cent Ans contre l’Angleterre.
+Depuis son enfance, Jeanne est connue pour sa grande piété et sa foi profonde.
+Elle passe beaucoup de temps à prier et développe très tôt un fort sentiment
+de loyauté envers son pays et sa religion.
+</p>
+</section>
+
+<section class="section" id="mission">
+<h2>✝️ Une mission religieuse</h2>
+<p>
+Selon ses propres témoignages, Jeanne affirme entendre des voix de saints
+qui lui demandent d’aider la France et de soutenir le dauphin Charles,
+héritier du trône. Elle est convaincue qu’elle doit accomplir une mission
+divine pour sauver son pays. Malgré son jeune âge et son absence totale
+d’expérience militaire, elle décide d’agir et cherche à rencontrer
+les responsables du royaume afin de convaincre Charles de lui faire confiance.
+</p>
+</section>
+
+<section class="section" id="victoire">
+<h2>⚔️ La libération d’Orléans</h2>
+<p>
+Après plusieurs difficultés, Jeanne parvient finalement à rencontrer
+le dauphin Charles. Impressionné par sa détermination, il lui accorde
+sa confiance. En 1429, Jeanne participe à la libération de la ville
+d’Orléans, occupée par les Anglais. Cette victoire marque un tournant
+important dans la guerre et redonne espoir au peuple français.
+Peu après, Jeanne accompagne Charles jusqu’à la ville de Reims,
+où il est couronné roi de France sous le nom de Charles VII.
+</p>
+</section>
+
+<div class="quote">
+Jeanne d’Arc devient un symbole de courage et de foi dans l’histoire de France.
+</div>
+
+<section class="section" id="capture">
+<h2>⚖️ Capture et procès</h2>
+<p>
+La situation de Jeanne change cependant rapidement. En 1430,
+elle est capturée par les Bourguignons, alliés des Anglais.
+Elle est ensuite livrée à ses ennemis et jugée à Rouen lors
+d’un procès religieux et politique. Accusée d’hérésie et
+d’autres crimes, elle est condamnée à mort. En 1431,
+à seulement 19 ans, Jeanne d’Arc est exécutée et brûlée vive.
+</p>
+</section>
+
+<section class="section" id="heritage">
+<h2>🕊 Héritage et reconnaissance</h2>
+<p>
+Après sa mort, l’image de Jeanne d’Arc change profondément.
+Elle devient progressivement un symbole de courage,
+de foi et de patriotisme pour la France. Plusieurs années
+plus tard, un nouveau procès reconnaît son innocence.
+En 1920, l’Église catholique la canonise officiellement,
+et elle est aujourd’hui considérée comme une héroïne
+nationale française et l’une des figures les plus
+célèbres de l’histoire du pays.
+</p>
+</section>
+
+</div>
+
+<footer>
+
+© Tous droits réservés —
+Gjimnazi "Muharrem Çollaku"
+
+</footer>
+
+<script>
+
+window.onscroll=function(){
+
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+
+document.getElementById("progress").style.width=scrolled+"%";
+
+};
+
+const sections=document.querySelectorAll(".section");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+sections.forEach(section=>{
+observer.observe(section);
+});
+
+</script>
+
+</body>
+</html>
