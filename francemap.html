@@ -246,7 +246,7 @@ pointer-events:none;
   box-shadow:0 10px 25px rgba(0,0,0,.5);
   opacity:0;
   transform:translateY(10px);
-  transition:.3s;
+  transition:opacity .3s ease, transform .3s ease;
   white-space:nowrap;
 }
 
@@ -271,7 +271,7 @@ pointer-events:none;
 
 <body>
 
-<a href="index.html" class="back-button">← Retour</a>
+<a href="index.html" class="back-button">← Retour à l’accueil</a>
 
 <div class="main-hero">
 
@@ -302,10 +302,7 @@ Explore les richesses offertes par les centres touristiques de la France.
 
 </div>
 
-<div class="tartuffe"
-onmouseenter="this.classList.add('show')"
-onmouseleave="this.classList.remove('show')"
-onclick="this.classList.toggle('show')">
+<div class="tartuffe">
 
 <div class="tartuffe-bubble">
 Clique sur une ville pour découvrir son histoire
@@ -315,16 +312,36 @@ Clique sur une ville pour découvrir son histoire
 
 </div>
 
-<!-- 🔥 AUTO SHOW SCRIPT -->
 <script>
 window.addEventListener("load", () => {
   const tartuffe = document.querySelector(".tartuffe");
 
-  tartuffe.classList.add("show");
+  let autoTimeout;
 
-  setTimeout(() => {
+  function showBubble() {
+    tartuffe.classList.add("show");
+  }
+
+  function hideBubble() {
     tartuffe.classList.remove("show");
+  }
+
+  // auto show on load
+  showBubble();
+
+  autoTimeout = setTimeout(() => {
+    hideBubble();
   }, 3000);
+
+  // hover behavior
+  tartuffe.addEventListener("mouseenter", () => {
+    clearTimeout(autoTimeout);
+    showBubble();
+  });
+
+  tartuffe.addEventListener("mouseleave", () => {
+    hideBubble();
+  });
 });
 </script>
 
