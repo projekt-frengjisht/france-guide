@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="sq">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Franca</title>
+<title>France</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -26,30 +26,67 @@ body{
   animation:fadePage 1s ease;
 }
 
+/* glow */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:radial-gradient(circle at 50% -20%, rgba(59,130,246,0.15), transparent 60%);
+pointer-events:none;
+z-index:-1;
+}
+
 @keyframes fadePage{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* Scrollbar */
+/* scrollbar */
 
-::-webkit-scrollbar{
-  width:6px;
-}
-
+::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-thumb{
   background:rgba(255,255,255,.25);
   border-radius:10px;
 }
 
 /* =====================
-   HERO LAYOUT
+   BACK BUTTON
+===================== */
+
+.back-button{
+position:fixed;
+top:20px;
+left:20px;
+padding:10px 18px;
+border-radius:999px;
+font-size:.9rem;
+text-decoration:none;
+color:#e6e6e6;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:
+0 8px 25px rgba(0,0,0,0.6),
+inset 0 1px 0 rgba(255,255,255,0.1);
+transition:all .3s ease;
+z-index:1000;
+}
+
+.back-button:hover{
+transform:translateY(-3px) scale(1.05);
+background:rgba(255,255,255,0.1);
+box-shadow:
+0 12px 30px rgba(0,0,0,0.8),
+0 0 15px rgba(200,210,230,0.3),
+inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.back-button:active{
+transform:scale(0.95);
+}
+
+/* =====================
+   HEADER
 ===================== */
 
 .main-hero{
@@ -57,10 +94,6 @@ body{
   display:flex;
   flex-direction:column;
 }
-
-/* =====================
-   HEADER
-===================== */
 
 header{
   padding:25px 20px 20px;
@@ -74,9 +107,8 @@ h1{
   font-family:"Playfair Display",serif;
   font-size:clamp(2rem,4vw,2.8rem);
   margin-bottom:8px;
-  letter-spacing:.5px;
-  color: #e0f0ff; /* White with subtle blue tint */
-  text-shadow: 0 2px 6px rgba(0,123,255,0.4);
+  color:#e0f0ff;
+  text-shadow:0 2px 6px rgba(0,123,255,0.4);
 }
 
 .subtitle{
@@ -96,12 +128,24 @@ h1{
   max-width:900px;
   margin:auto;
   padding-bottom:30px;
+  transition:transform .6s ease;
+}
+
+.map-container:hover{
+  transform:translateY(-5px);
+}
+
+.map-container::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:18px;
+background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+pointer-events:none;
 }
 
 .map-container img{
   width:100%;
-  height:auto;
-  display:block;
   border-radius:18px;
   box-shadow:0 20px 35px rgba(0,0,0,.6);
   transition:transform .6s ease;
@@ -112,7 +156,7 @@ h1{
 }
 
 /* =====================
-   CITY BUTTONS
+   CITY
 ===================== */
 
 .city{
@@ -124,17 +168,21 @@ h1{
   font-size:.85rem;
   border-radius:999px;
   text-decoration:none;
-  box-shadow:0 6px 14px rgba(0,0,0,.35);
-  transition:transform .25s ease,box-shadow .25s ease;
   font-weight:500;
+
+  box-shadow:
+  0 6px 14px rgba(0,0,0,.35),
+  0 0 0 rgba(59,130,246,0);
+
+  transition:.25s;
 }
 
 .city:hover{
   transform:translate(-50%,-50%) scale(1.18);
-  box-shadow:0 12px 25px rgba(0,0,0,.5);
+  box-shadow:
+  0 12px 25px rgba(0,0,0,.5),
+  0 0 20px rgba(59,130,246,0.6);
 }
-
-/* Pulse */
 
 .city::after{
   content:"";
@@ -146,19 +194,11 @@ h1{
 }
 
 @keyframes pulse{
-  0%{
-    transform:scale(.9);
-    opacity:.6;
-  }
-  70%{
-    transform:scale(1.3);
-    opacity:0;
-  }
+  0%{transform:scale(.9);opacity:.6;}
+  70%{transform:scale(1.3);opacity:0;}
 }
 
-/* =====================
-   CITY POSITIONS
-===================== */
+/* positions */
 
 #paris{top:28%;left:50%;}
 #orleans{top:39%;left:44%;}
@@ -186,7 +226,7 @@ h1{
 
 .tartuffe img{
   width:100px;
-  transition:transform .3s ease;
+  transition:.3s;
 }
 
 .tartuffe:hover img{
@@ -201,15 +241,14 @@ h1{
   color:#e0e7ff;
   padding:10px 14px;
   border-radius:14px;
-  font-size:.9rem;
+  font-size:.95rem;
+  line-height:1.4;
   box-shadow:0 10px 25px rgba(0,0,0,.5);
   opacity:0;
   transform:translateY(10px);
   transition:.3s;
   white-space:nowrap;
 }
-
-/* speech arrow */
 
 .tartuffe-bubble::after{
   content:"";
@@ -227,33 +266,19 @@ h1{
   transform:translateY(0);
 }
 
-/* =====================
-   MOBILE
-===================== */
-
-@media (max-width:600px){
-
-.subtitle{
-  padding:0 10px;
-}
-
-.tartuffe img{
-  width:85px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
+<a href="index.html" class="back-button">← Retour</a>
+
 <div class="main-hero">
 
 <header>
-<h1>Franca</h1>
+<h1>France</h1>
 <p class="subtitle">
-Eksploro vlerat që ofrojnë qendrat turistike të Francës.
+Explore les richesses offertes par les centres touristiques de la France.
 </p>
 </header>
 
@@ -262,7 +287,7 @@ Eksploro vlerat që ofrojnë qendrat turistike të Francës.
 <img src="https://uploads.onecompiler.io/43arb5wzh/448vzmv43/France.jpg">
 
 <a class="city" id="lille" href="lille.html">Lille</a>
-<a class="city" id="orleans" href="orleans.html">Orleans</a>
+<a class="city" id="orleans" href="orleans.html">Orléans</a>
 <a class="city" id="paris" href="paris.html">Paris</a>
 <a class="city" id="nantes" href="nantes.html">Nantes</a>
 <a class="city" id="bordeaux" href="bordeaux.html">Bordeaux</a>
@@ -277,20 +302,31 @@ Eksploro vlerat që ofrojnë qendrat turistike të Francës.
 
 </div>
 
-<!-- TARTUFFE -->
-
 <div class="tartuffe"
 onmouseenter="this.classList.add('show')"
 onmouseleave="this.classList.remove('show')"
 onclick="this.classList.toggle('show')">
 
 <div class="tartuffe-bubble">
-Kliko te një nga qytetet për të zbuluar më shumë
+Clique sur une ville pour découvrir son histoire
 </div>
 
 <img src="https://uploads.onecompiler.io/43arb5wzh/448vzmv43/Tartuffe.png">
 
 </div>
+
+<!-- 🔥 AUTO SHOW SCRIPT -->
+<script>
+window.addEventListener("load", () => {
+  const tartuffe = document.querySelector(".tartuffe");
+
+  tartuffe.classList.add("show");
+
+  setTimeout(() => {
+    tartuffe.classList.remove("show");
+  }, 3000);
+});
+</script>
 
 </body>
 </html>
