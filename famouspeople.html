@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -11,7 +11,6 @@
 <style>
 
 :root{
-/* shared gradient for title and card text */
 --text-gradient:linear-gradient(90deg,#ffffff,#e5e7eb,#cbd5e1);
 }
 
@@ -23,8 +22,6 @@ font-family:'Inter',sans-serif;
 scroll-behavior:smooth;
 }
 
-/* PAGE */
-
 body{
 background:linear-gradient(135deg,#14171c,#1f252d,#2a3038);
 color:#e6e6e6;
@@ -34,8 +31,6 @@ display:flex;
 flex-direction:column;
 align-items:center;
 }
-
-/* SCROLLBAR */
 
 ::-webkit-scrollbar{
 width:10px;
@@ -50,66 +45,49 @@ background:linear-gradient(#3d4652,#6c7685);
 border-radius:10px;
 }
 
-/* BACK BUTTON */
-
 .back-button{
 position:fixed;
 top:25px;
 left:25px;
-
 width:52px;
 height:52px;
-
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-
 font-size:22px;
 text-decoration:none;
 color:#e6e6e6;
-
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
 -webkit-backdrop-filter:blur(10px);
-
 border:1px solid rgba(255,255,255,0.15);
-
 box-shadow:
 0 8px 25px rgba(0,0,0,0.6),
 inset 0 1px 0 rgba(255,255,255,0.1);
-
 transition:all .3s ease;
 }
 
 .back-button:hover{
 transform:translateY(-3px) scale(1.05);
-
 background:rgba(255,255,255,0.1);
-
 box-shadow:
 0 12px 30px rgba(0,0,0,0.8),
 0 0 15px rgba(200,210,230,0.3),
 inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* TITLE */
-
 .title{
 font-size:34px;
 font-weight:600;
 margin-bottom:50px;
 letter-spacing:1px;
-
 background:var(--text-gradient);
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
-
 position:relative;
 }
-
-/* underline */
 
 .title::after{
 content:"";
@@ -117,16 +95,12 @@ position:absolute;
 left:50%;
 transform:translateX(-50%);
 bottom:-10px;
-
 width:110px;
 height:2px;
-
 background:var(--text-gradient);
 border-radius:3px;
 opacity:0.8;
 }
-
-/* GRID */
 
 .grid{
 width:100%;
@@ -135,8 +109,6 @@ display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:35px;
 }
-
-/* CARD */
 
 .card{
 text-decoration:none;
@@ -150,18 +122,19 @@ display:flex;
 flex-direction:column;
 }
 
+/* existing hover kept */
 .card:hover{
 transform:translateY(-10px) scale(1.02);
 box-shadow:0 20px 45px rgba(0,0,0,0.8);
 border:1px solid rgba(255,255,255,0.2);
 }
 
-/* IMAGE */
-
+/* ✅ FIXED IMAGE */
 .card img{
 width:100%;
 height:180px;
 object-fit:cover;
+object-position:50% 20%;
 transition:transform .4s ease;
 }
 
@@ -169,22 +142,81 @@ transition:transform .4s ease;
 transform:scale(1.05);
 }
 
-/* CARD TEXT */
-
 .card p{
 padding:14px;
 text-align:center;
 font-size:16px;
 font-weight:500;
 background:#242a31;
-
 background-image:var(--text-gradient);
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
 }
 
-/* MOBILE */
+/* ========================= */
+/* 🔥 ADDED MODERN UPGRADES */
+/* ========================= */
+
+.card{
+transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+position:relative;
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.025);
+}
+
+.card:active{
+transform:scale(0.98);
+}
+
+/* glow border */
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:20px;
+padding:1px;
+background:linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+
+opacity:0;
+transition:opacity .3s ease;
+pointer-events:none;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+/* image fade overlay */
+.card::after{
+content:"";
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:60%;
+background:linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+pointer-events:none;
+}
+
+/* cinematic image */
+.card img{
+filter:contrast(1.05) brightness(0.95) saturate(1.05);
+}
+
+/* typography upgrade */
+.card p{
+font-size:17px;
+letter-spacing:0.3px;
+}
 
 @media(max-width:700px){
 
